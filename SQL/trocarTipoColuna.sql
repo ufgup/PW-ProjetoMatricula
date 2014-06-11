@@ -1,0 +1,1 @@
+alter table aluno alter column matricula type int;
