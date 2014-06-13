@@ -98,22 +98,22 @@ public class AlunoDao {
 			//Obtém uma sentença SQL.
 			Statement stmt = conn.createStatement();
 			
-//			if(valor.equals("Homens")){
-//				ResultSet rs = stmt.executeQuery("select count(*) as quantidade from aluno where sexo = 'M'");
-//				cont = rs.getInt("quantidade");
-//			}
-//			else if(valor.equals("Mulheres")) {
-//				ResultSet rs = stmt.executeQuery("select count(*) as quantidade from aluno where sexo = 'F'");
-//				cont = rs.getInt("quantidade");
-//			}
-//			else if(valor.equals("Maior")) {
-//				ResultSet rs = stmt.executeQuery("select count(*) as quantidade from aluno where idade >= 18");
-//				cont = rs.getInt("quantidade");
-//			}
-//			else if(valor.equals("Menor")) {
-//				ResultSet rs = stmt.executeQuery("select count(*) as quantidade from aluno where idade < 18");
-//				cont = rs.getInt("quantidade");
-//			}
+			if(valor.equals("Homens")){
+				ResultSet rs = stmt.executeQuery("select count(*) as quantidade from aluno where sexo = 'M'");
+				cont = rs.getInt("quantidade");
+			}
+			else if(valor.equals("Mulheres")) {
+				ResultSet rs = stmt.executeQuery("select count(*) as quantidade from aluno where sexo = 'F'");
+				cont = rs.getInt("quantidade");
+			}
+			else if(valor.equals("Maior")) {
+				ResultSet rs = stmt.executeQuery("select count(*) as quantidade from aluno where idade >= 18");
+				cont = rs.getInt("quantidade");
+			}
+			else if(valor.equals("Menor")) {
+				ResultSet rs = stmt.executeQuery("select count(*) as quantidade from aluno where idade < 18");
+				cont = rs.getInt("quantidade");
+			}
 			
 		} catch (Exception e) {
 			throw new RuntimeException(e);
