@@ -1,7 +1,6 @@
 package lab.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -10,23 +9,26 @@ import java.util.List;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
+import lab.utils.JdbcUtils;
+
 @ManagedBean
 @ApplicationScoped
 public class AlunoDao {
 	
 	public List<Aluno> obterAlunos() {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
 		try {
-			
 			List<Aluno> alunos = new ArrayList<Aluno>();
-			// URL de conexão JDBC com o banco de dados.
-			String url = "jdbc:derby://localhost/db;create=true";
 			// Obtém uma conexão com o banco de dados.
-			Connection conn = DriverManager
-					.getConnection(url, "app", "123");
+			conn = JdbcUtils.createConnection();
+			
 			//Obtém uma sentença SQL.
-			Statement stmt = conn.createStatement();
+			stmt = conn.createStatement();
 			//Executa a instrução SQL.
-			ResultSet rs = stmt
+			rs = stmt
 					.executeQuery("select matricula, nome, curso from aluno");
 			
 			while(rs.next()) {
@@ -48,15 +50,16 @@ public class AlunoDao {
 	}
 	
 	public void incluirAluno(Aluno aluno) {
+		Connection conn = null;
+		Statement stmt = null;
+		
 		try {
-			// URL de conexão JDBC com o banco de dados.
-			
-			String url = "jdbc:derby://localhost/db;create=true";
-			// Obtém uma conexão com o banco de dados.
-			Connection conn = DriverManager
-					.getConnection(url, "app", "123");
+			//Cria a conexão com o Banco de Dados
+			conn = JdbcUtils.createConnection();
+			//Inicia a transação
+			conn.setAutoCommit(false);
 			//Obtém uma sentença SQL.
-			Statement stmt = conn.createStatement();
+			stmt = conn.createStatement();
 			//Executa a instrução SQL.
 			stmt.executeUpdate("insert into aluno (matricula, nome, sexo, idade, curso) values (" 
 							+ " '" + aluno.getMatricula() + "', "
@@ -65,58 +68,81 @@ public class AlunoDao {
 							+ aluno.getIdade() + ", "
 							+ aluno.getCurso() + " )"
 							);
-			
+			conn.commit();
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			
+			try {
+				conn.rollback();
+				throw new RuntimeException(e);
+			} catch (Exception el) {
+				//Não tem como fazer nada!
+			}
+			
+			
+		} finally {
+			JdbcUtils.close(conn, stmt);
 		}
 	}
 	
 	public void excluirAluno(Aluno aluno) {
+		Connection conn = null;
+		Statement stmt = null;
+		
 		try {
-			String url = "jdbc:derby://localhost/db;create=true";
-			// Obtém uma conexão com o banco de dados.
-			Connection conn = DriverManager
-					.getConnection(url, "app", "123");
-			//Obtém uma sentença SQL.
-			Statement stmt = conn.createStatement();
-			//Executa a instrução SQL.
+			conn = JdbcUtils.createConnection();
+			conn.setAutoCommit(false);
+			stmt = conn.createStatement();
+			
 			stmt.execute("delete from aluno where matricula = '" + aluno.getMatricula() + "'");
+			
+			conn.commit();
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			
+			try {
+				conn.rollback();
+				throw new RuntimeException(e);
+			} catch (Exception el) {
+				//Não consigo fazer mais nada
+			}
+		} finally {
+			JdbcUtils.close(conn, stmt);
 		}
 	}
 	
 	public int contagem(String valor) {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
 		
 		int cont = 0;
 		
 		try {
-			String url = "jdbc:derby://localhost/db;create=true";
-			// Obtém uma conexão com o banco de dados.
-			Connection conn = DriverManager
-					.getConnection(url, "app", "123");
+			conn = JdbcUtils.createConnection();
+			
 			//Obtém uma sentença SQL.
-			Statement stmt = conn.createStatement();
+			stmt = conn.createStatement();
 			
 			if(valor.equals("Homens")){
-				ResultSet rs = stmt.executeQuery("select count(*) as quantidade from aluno where sexo = 'M'");
+				rs = stmt.executeQuery("select count(*) as quantidade from aluno where sexo = 'M'");
 				cont = rs.getInt("quantidade");
 			}
 			else if(valor.equals("Mulheres")) {
-				ResultSet rs = stmt.executeQuery("select count(*) as quantidade from aluno where sexo = 'F'");
+				rs = stmt.executeQuery("select count(*) as quantidade from aluno where sexo = 'F'");
 				cont = rs.getInt("quantidade");
 			}
 			else if(valor.equals("Maior")) {
-				ResultSet rs = stmt.executeQuery("select count(*) as quantidade from aluno where idade >= 18");
+				rs = stmt.executeQuery("select count(*) as quantidade from aluno where idade >= 18");
 				cont = rs.getInt("quantidade");
 			}
 			else if(valor.equals("Menor")) {
-				ResultSet rs = stmt.executeQuery("select count(*) as quantidade from aluno where idade < 18");
+				rs = stmt.executeQuery("select count(*) as quantidade from aluno where idade < 18");
 				cont = rs.getInt("quantidade");
 			}
 			
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		} finally {
+			JdbcUtils.close(conn, stmt, rs);
 		}
 		
 		return cont;
