@@ -8,6 +8,7 @@ create table aluno (
 	idade int,
 	sexo char,
 	curso int 
-); */
+); 
 
 alter table aluno add foreign key (curso) references curso(codigo);
+*/

@@ -1,9 +1,9 @@
-Fri Jun 13 19:15:56 BRT 2014 : Aviso: UnknkownHostException: linux-0uqo: linux-0uqo: Nome ou serviço desconhecido.
-Fri Jun 13 19:15:56 BRT 2014 : Apache Derby Servidor de Rede - 10.10.1.1 - (1458268) iniciado e pronto para aceitar conexões na porta 1527 em {3}
+Fri Jun 13 21:20:26 BRT 2014 : Aviso: UnknkownHostException: linux-0uqo: linux-0uqo: Nome ou serviço desconhecido.
+Fri Jun 13 21:20:26 BRT 2014 : Apache Derby Servidor de Rede - 10.10.1.1 - (1458268) iniciado e pronto para aceitar conexões na porta 1527 em {3}
 ----------------------------------------------------------------
-Fri Jun 13 19:16:26 BRT 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0146-974d-2e8c-00000bd42e38 
-on database directory /home/alunoinf/git/bruno-ufg/db with class loader WebAppClassLoader=1083016347@408d849b 
+Fri Jun 13 21:20:48 BRT 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0146-97bf-2c73-00000a154c10 
+on database directory /home/alunoinf/git/bruno-ufg/db with class loader WebAppClassLoader=645917105@267fe9b1 
 Loaded from file:/home/alunoinf/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_17-b02
