@@ -30,14 +30,6 @@ public class AlunoService {
 	}
 	
 	public Estatistica gerarEstatistica() {
-		
-		Estatistica result = new Estatistica();
-		
-		result.setHomem(alunoDao.contagem("Homens"));
-		result.setMulher(alunoDao.contagem("Mulheres"));
-		result.setMaior(alunoDao.contagem("Maior"));
-		result.setMenor(alunoDao.contagem("Menor"));
-		
-		return result;
+		return alunoDao.contagem();
 	}
 }

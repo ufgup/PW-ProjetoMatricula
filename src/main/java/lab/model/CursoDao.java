@@ -49,13 +49,16 @@ public class CursoDao {
 	
 	public void incluirCurso(Curso curso) {
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		
 		try {
 			conn = JdbcUtils.createConnection();
-			conn.setAutoCommit(false);
-			stmt = conn.createStatement();
-			stmt.executeUpdate("insert into curso (codigo, nome) values (" + curso.getCodigo() + ", '" + curso.getNome() + "' )");
+			conn.setAutoCommit(false); //Inicia a transação
+			
+			stmt = conn.prepareStatement("insert into curso (codigo, nome) values (? , ? )");
+			stmt.setInt(1, curso.getCodigo());
+			stmt.setString(2, curso.getNome());
+			stmt.executeUpdate();
 			
 			conn.commit();
 		} catch (Exception e) {
@@ -73,13 +76,15 @@ public class CursoDao {
 	
 	public void excluirCurso(Curso curso) {
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		
 		try {
 			conn = JdbcUtils.createConnection();
 			conn.setAutoCommit(false);
-			stmt = conn.createStatement();
-			stmt.executeUpdate("delete from curso where codigo = " +  curso.getCodigo());
+			
+			stmt = conn.prepareStatement("delete from curso where codigo = ?");
+			stmt.setInt(1, curso.getCodigo());
+			stmt.executeUpdate();
 			
 			conn.commit();
 		} catch(Exception e) {

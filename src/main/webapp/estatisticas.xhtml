@@ -15,10 +15,10 @@
 		</h1>
 		
 		<h:dataTable value="#{cadastroAluno.estatistica}" var="result" styleClass="simples">
-			<h:column><f:facet name="header">Homens</f:facet><h:outputText>#{result.homem}</h:outputText></h:column>
-			<h:column><f:facet name="header">Mulheres</f:facet><h:outputText>#{result.mulher}</h:outputText></h:column>
-			<h:column><f:facet name="header">Maiores</f:facet><h:outputText>#{result.maior}</h:outputText></h:column>
-			<h:column><f:facet name="header">Menores</f:facet><h:outputText>#{result.menor}</h:outputText></h:column>
+			<h:column><f:facet name="header">Homens</f:facet><h:outputText value="#{result.homem}" /></h:column>
+			<h:column><f:facet name="header">Mulheres</f:facet><h:outputText value="#{result.mulher}" /></h:column>
+			<h:column><f:facet name="header">Maiores</f:facet><h:outputText value="#{result.maior}" /></h:column>
+			<h:column><f:facet name="header">Menores</f:facet><h:outputText value="#{result.menor}" /></h:column>
 		</h:dataTable>
 		
 	</body>
