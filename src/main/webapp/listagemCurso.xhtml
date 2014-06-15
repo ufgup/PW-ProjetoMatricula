@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:f="http://xmlns.jcp.org/jsf/core">
+	<head>
+		<title>Alunos / Cadastro / Listagem Cursos</title>
+		<link rel="shortcut icon" href="favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="estilo.css" />
+	</head>
+	<body>
+		<h1>
+			<a href="index.xhtml">Alunos</a> / <a href="cadastro.xhtml">Cadastro Curso</a> / Listagem Curso
+		</h1>
+		<hr />
+		<h:form>
+		<h:dataTable value="#{cadastroCurso.cursos}" var="curso" styleClass="simples">
+			<h:column><f:facet name="header">Nome</f:facet>#{curso.nome}</h:column>
+			<h:column><f:facet name="header">Código</f:facet>#{curso.codigo}</h:column>
+			<h:column><f:facet name="header">Ação</f:facet><h:commandLink action="#{cadastroCurso.excluir(curso)}">excluir</h:commandLink></h:column>
+		</h:dataTable>
+		</h:form>
+	</body>
+</html>
