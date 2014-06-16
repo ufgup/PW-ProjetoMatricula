@@ -1,14 +1,14 @@
-Sun Jun 15 09:16:36 BRT 2014 : Apache Derby Servidor de Rede - 10.10.1.1 - (1458268) iniciado e pronto para aceitar conexões na porta 1527 em {3}
+Mon Jun 16 10:41:43 BRT 2014 : Apache Derby Servidor de Rede - 10.10.1.1 - (1458268) iniciado e pronto para aceitar conexões na porta 1527 em {3}
 ----------------------------------------------------------------
-Sun Jun 15 09:16:43 BRT 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0146-9f75-3135-00001323fd18 
-on database directory /home/brunokarpo/git/bruno-ufg/db with class loader WebAppClassLoader=144654895@89f422f 
-Loaded from file:/home/brunokarpo/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
+Mon Jun 16 10:41:54 BRT 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0146-a4e9-7a28-0000034d8340 
+on database directory /home/bruno-oobj/git/bruno-ufg/db with class loader WebAppClassLoader=596986079@239548df 
+Loaded from file:/home/bruno-oobj/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_60-b19
-user.dir=/home/brunokarpo/git/bruno-ufg
+user.dir=/home/bruno-oobj/git/bruno-ufg
 os.name=Linux
 os.arch=amd64
-os.version=3.13.0-29-generic
+os.version=3.2.0-64-generic
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
