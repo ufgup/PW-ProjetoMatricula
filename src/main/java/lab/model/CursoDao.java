@@ -47,6 +47,7 @@ public class CursoDao {
 		return cursos;
 	}
 	
+	@SuppressWarnings("resource")
 	public void incluirCurso(Curso curso) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -58,6 +59,12 @@ public class CursoDao {
 			stmt = conn.prepareStatement("insert into curso (codigo, nome) values (? , ? )");
 			stmt.setInt(1, curso.getCodigo());
 			stmt.setString(2, curso.getNome());
+			stmt.executeUpdate();
+			
+			stmt = conn.prepareStatement("insert into curso_log (codigo_curso, data, operacao) values (?, ?, ?)");
+			stmt.setInt(1, curso.getCodigo());
+			stmt.setTimestamp(2, JdbcUtils.agora());
+			stmt.setString(3, "Incluir");
 			stmt.executeUpdate();
 			
 			conn.commit();
@@ -74,6 +81,7 @@ public class CursoDao {
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	public void excluirCurso(Curso curso) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -81,6 +89,10 @@ public class CursoDao {
 		try {
 			conn = JdbcUtils.createConnection();
 			conn.setAutoCommit(false);
+			
+			stmt = conn.prepareStatement("delete from curso_log where codigo = ?");
+			stmt.setInt(1, curso.getCodigo());
+			stmt.executeUpdate();
 			
 			stmt = conn.prepareStatement("delete from curso where codigo = ?");
 			stmt.setInt(1, curso.getCodigo());

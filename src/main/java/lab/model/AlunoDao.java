@@ -54,6 +54,7 @@ public class AlunoDao {
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	public void incluirAluno(Aluno aluno) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -72,6 +73,13 @@ public class AlunoDao {
 			stmt.setInt(5, aluno.getCurso());
 			//Executa a instrução SQL.
 			stmt.executeUpdate();
+			
+			stmt = conn.prepareStatement("insert into aluno_log (matricula_aluno, data, operacao) values (?, ?, ?)");
+			stmt.setString(1, aluno.getMatricula());
+			stmt.setTimestamp(2, JdbcUtils.agora());
+			stmt.setString(3, "Incluir");
+			stmt.executeUpdate();
+			
 			conn.commit(); //Commita a modificação
 		} catch (Exception e) {
 			
@@ -88,6 +96,7 @@ public class AlunoDao {
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	public void excluirAluno(Aluno aluno) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -97,8 +106,12 @@ public class AlunoDao {
 			conn.setAutoCommit(false);
 			stmt = conn.prepareStatement("delete from aluno where matricula = ?");
 			stmt.setString(1, aluno.getMatricula());
-			
 			stmt.executeUpdate();
+			
+			stmt = conn.prepareStatement("delete from aluno_log where matricula_aluno = ?");
+			stmt.setString(1, aluno.getMatricula());
+			stmt.executeUpdate();
+			
 			conn.commit();
 		} catch (Exception e) {
 			

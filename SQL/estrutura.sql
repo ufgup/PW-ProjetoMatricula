@@ -11,4 +11,19 @@ create table aluno (
 ); 
 
 alter table aluno add foreign key (curso) references curso(codigo);
-*/
+
+
+create table curso_log (
+	codigo_curso int,
+	data date,
+	operacao varchar(20)
+);
+
+create table aluno_log (
+	matricula_aluno varchar(6),
+	data date,
+	operacao varchar(20)
+);
+
+alter table curso_log add foreign key (codigo_curso) references curso(codigo);
+alter table aluno_log add foreign key (matricula_aluno) references aluno(matricula);*/

@@ -1,9 +1,11 @@
 package lab.utils;
 
+import java.sql.Timestamp;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.util.Date;
 
 public class JdbcUtils {
 	
@@ -36,5 +38,9 @@ public class JdbcUtils {
 	
 	public static void close(Connection conn, Statement stmt) {
 		close(conn, stmt, null);
+	}
+	
+	public static Timestamp agora() {
+		return new Timestamp(new Date().getTime());
 	}
 }
