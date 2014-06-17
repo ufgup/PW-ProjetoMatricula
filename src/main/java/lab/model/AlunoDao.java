@@ -104,11 +104,12 @@ public class AlunoDao {
 		try {
 			conn = JdbcUtils.createConnection();
 			conn.setAutoCommit(false);
-			stmt = conn.prepareStatement("delete from aluno where matricula = ?");
+			
+			stmt = conn.prepareStatement("delete from aluno_log where matricula_aluno = ?");
 			stmt.setString(1, aluno.getMatricula());
 			stmt.executeUpdate();
 			
-			stmt = conn.prepareStatement("delete from aluno_log where matricula_aluno = ?");
+			stmt = conn.prepareStatement("delete from aluno where matricula = ?");
 			stmt.setString(1, aluno.getMatricula());
 			stmt.executeUpdate();
 			

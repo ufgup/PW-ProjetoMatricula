@@ -47,7 +47,6 @@ public class CursoDao {
 		return cursos;
 	}
 	
-	@SuppressWarnings("resource")
 	public void incluirCurso(Curso curso) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -81,7 +80,6 @@ public class CursoDao {
 		}
 	}
 	
-	@SuppressWarnings("resource")
 	public void excluirCurso(Curso curso) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -90,7 +88,7 @@ public class CursoDao {
 			conn = JdbcUtils.createConnection();
 			conn.setAutoCommit(false);
 			
-			stmt = conn.prepareStatement("delete from curso_log where codigo = ?");
+			stmt = conn.prepareStatement("delete from curso_log where codigo_curso = ?");
 			stmt.setInt(1, curso.getCodigo());
 			stmt.executeUpdate();
 			
